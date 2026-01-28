@@ -1,0 +1,126 @@
+"use client";
+
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import PageHero from "@/components/PageHero";
+import ProductCard from "@/components/ProductCard";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, Zap, Droplets } from "lucide-react";
+
+const cijProducts = [
+    {
+        title: "CIJ Master Series",
+        description: "High-speed continuous inkjet printers for non-stop production. Built for 24/7 operation with instant-dry inks and micro to macro coding capabilities.",
+        image: "/assets/cij_printer_industrial.png",
+        specs: ["Non-contact printing", "Instant dry inks", "Micro & Macro coding"],
+    },
+    {
+        title: "CIJ Premium Industrial",
+        description: "Premium-grade CIJ systems for demanding environments. Superior print quality and reliability for pharmaceuticals, FMCG, and automotive sectors.",
+        image: "/assets/cij_printer_premium.png",
+        specs: ["IP65 Protected", "High Resolution", "FDA Compliant Inks"],
+    },
+];
+
+export default function CIJPage() {
+    return (
+        <main className="min-h-screen">
+            <Navbar />
+            <PageHero
+                title="Continuous Inkjet (CIJ)"
+                subtitle="High-speed coding solutions for non-stop production environments. Precise, versatile, and built for 24/7 industrial performance."
+                image="/assets/cij_printer_industrial.png"
+                imageAlt="CIJ Printer"
+            />
+
+            {/* Overview */}
+            <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:40px_40px] opacity-30" />
+                <div className="section-container relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="relative order-2 lg:order-1"
+                        >
+                            <div className="relative overflow-hidden border border-gray-200">
+                                <Image
+                                    src="/assets/cij_printer_premium.png"
+                                    alt="CIJ Printer"
+                                    width={600}
+                                    height={450}
+                                    className="w-full h-auto object-contain p-6 sm:p-8"
+                                />
+                            </div>
+                            <div className="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-16 h-16 sm:w-24 sm:h-24 border-t-2 border-l-2 border-blue-500/30" />
+                            <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 border-b-2 border-r-2 border-blue-500/30" />
+                        </motion.div>
+                        <div className="order-1 lg:order-2">
+                            <span className="inline-block py-1 px-3 bg-blue-500/10 border border-blue-500/20 text-blue-600 text-[10px] font-bold tracking-[0.3em] uppercase mb-4 sm:mb-6">
+                                Why CIJ?
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-industrial-charcoal mb-4 sm:mb-6">
+                                Non-Contact Precision. <span className="text-primary">Zero Downtime.</span>
+                            </h2>
+                            <p className="text-gray-500 font-body mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+                                Our Continuous Inkjet (CIJ) printers deliver high-speed coding across diverse substrates—metal, plastic, glass, cartons, and flexible packaging. Engineered for harsh industrial environments with minimal maintenance and maximum uptime.
+                            </p>
+                            <div className="space-y-3 sm:space-y-4">
+                                {[
+                                    { icon: <Zap size={20} className="text-blue-500 flex-shrink-0" />, text: "24/7 operation with instant-dry solvent & water-based inks" },
+                                    { icon: <Droplets size={20} className="text-blue-500 flex-shrink-0" />, text: "Micro to macro character heights for dates, batch codes, barcodes" },
+                                    { icon: <CheckCircle2 size={20} className="text-blue-500 flex-shrink-0" />, text: "Global compliance: FDA, EU, and industry-specific certifications" },
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-start gap-3 sm:gap-4">
+                                        <div className="mt-0.5">{item.icon}</div>
+                                        <p className="text-gray-600 font-body text-sm sm:text-base">{item.text}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center gap-2 mt-8 sm:mt-10 btn-primary group min-h-[48px]"
+                            >
+                                Request a Demo
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Product Grid */}
+            <section className="py-16 sm:py-24 bg-[#fafafa] relative overflow-hidden">
+                <div className="section-container relative z-10">
+                    <div className="flex items-center gap-2 mb-8 sm:mb-12">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
+                        <h2 className="text-[10px] sm:text-[11px] font-bold text-blue-600 uppercase tracking-[0.3em] sm:tracking-[0.4em]">
+                            CIJ Product Range
+                        </h2>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-industrial-charcoal mb-10 sm:mb-16">
+                        Explore Our <span className="text-primary">CIJ Solutions</span>
+                    </h3>
+                    <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+                        {cijProducts.map((product, index) => (
+                            <motion.div
+                                key={product.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <ProductCard {...product} />
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <Footer />
+        </main>
+    );
+}

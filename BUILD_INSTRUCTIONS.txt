@@ -1,0 +1,46 @@
+===========================================
+BUILD INSTRUCTIONS FOR HOSTINGER hPANEL
+===========================================
+
+IMPORTANT: Before building, you MUST:
+
+1. STOP the dev server if it's running:
+   - Find the terminal where "npm run dev" is running
+   - Press Ctrl+C to stop it
+   - Wait until it's fully stopped
+
+2. CLOSE any editors/processes that might have .next folder open
+
+3. THEN run the build:
+
+   Option A: Using PowerShell script
+   --------------------------------
+   .\build-for-hostinger.ps1
+
+   Option B: Using npm directly
+   -----------------------------
+   npm run build
+
+===========================================
+
+AFTER BUILD SUCCESS:
+
+1. A folder called "out" will be created
+2. This folder contains all static files ready for upload
+3. Upload ALL contents from "out" folder to Hostinger:
+   - Login to Hostinger hPanel
+   - Go to File Manager
+   - Navigate to public_html (or your domain root)
+   - Upload all files and folders from "out" folder
+
+===========================================
+
+If build still fails with "EPERM" error:
+
+1. Restart your computer (releases all file locks)
+2. Or manually delete .next folder after closing all processes
+3. Then run build again
+
+===========================================
+
+For detailed deployment guide, see: DEPLOYMENT.md

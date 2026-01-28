@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #003366;
+  --color-primary-light: #0056b3;
+  --color-industrial-grey: #F5F5F5;
+  --color-industrial-charcoal: #333333;
+  --color-background: #ffffff;
+  --color-foreground: #333333;
+
+  --font-heading: "Outfit", "Inter", sans-serif;
+  --font-body: "Inter", "Roboto", sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #333333;
+}
+
+@layer base {
+  body {
+    @apply font-body text-foreground bg-background scroll-smooth overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white font-bold uppercase tracking-widest px-8 py-3 hover:bg-primary-light transition-all duration-300 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .industrial-card {
+    @apply bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl transition-all duration-500 border-l-4 border-l-transparent hover:border-l-primary;
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s infinite alternate ease-in-out;
+}
+
+.animate-float {
+  animation: float 6s infinite ease-in-out;
+}
