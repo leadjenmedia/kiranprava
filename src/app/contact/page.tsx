@@ -9,10 +9,41 @@ import { useState } from "react";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSubmitted(true);
+        setLoading(true);
+        setError("");
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            message: formData.get("message"),
+        };
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to send message");
+            }
+
+            setSubmitted(true);
+        } catch (err) {
+            setError("Failed to send message. Please try again or email us directly at support@kiranprava.com");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -107,6 +138,12 @@ export default function ContactPage() {
                                 Get detailed industrial reports on CIJ, TIJ, TTO, and packaging integration for your line.
                             </p>
 
+                            {error && (
+                                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded">
+                                    <p className="text-red-600 text-sm font-body">{error}</p>
+                                </div>
+                            )}
+
                             {submitted ? (
                                 <div className="py-12 text-center">
                                     <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -174,9 +211,10 @@ export default function ContactPage() {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="w-full btn-primary flex items-center justify-center gap-2 group min-h-[48px]"
+                                        disabled={loading}
+                                        className="w-full btn-primary flex items-center justify-center gap-2 group min-h-[48px] disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        Send Message
+                                        {loading ? "Sending..." : "Send Message"}
                                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                     </button>
                                 </form>
