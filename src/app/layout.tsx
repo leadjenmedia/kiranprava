@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Roboto } from "next/font/google";
 import "./globals.css";
+import SupportButton from "@/components/SupportButton";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
                 suppressHydrationWarning
             >
                 {children}
+                <SupportButton />
             </body>
         </html>
     );
